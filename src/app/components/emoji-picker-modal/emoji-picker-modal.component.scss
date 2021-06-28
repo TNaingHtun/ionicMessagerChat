@@ -1,0 +1,13 @@
+.categoryContainer {
+    overflow: scroll;
+    white-space: nowrap;
+    .category {
+        display: inline-block;
+        padding: 0px 10px;
+        text-align: center;
+    }
+}
+
+.selectedCategory {
+    border-bottom: 2px solid var(--ion-color-primary);
+}

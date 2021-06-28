@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "messagechat-970b8": {
+      "hosting": {
+        "app": [
+          "messagechat-970b8"
+        ]
+      }
+    }
+  }
+}

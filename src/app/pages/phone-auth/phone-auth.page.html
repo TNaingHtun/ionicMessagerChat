@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Phone Authentication</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-card class="ion-padding">
+        <!-- <ion-item>
+            <ion-input placeholder="Enter Name" [(ngModel)]="name" autofocus="true" clearInput="true"></ion-input>
+        </ion-item>
+        <ion-item class="margin-bottom">
+            <ion-label position="floating">Enter Phone Number</ion-label>
+            <ion-input type="number" [(ngModel)]="phoneNumber"></ion-input>
+        </ion-item>
+
+        <ion-button class="margin-bottom" expand="block" id="sign-in-button" (click)="signIn(phoneNumber,name)">
+            Send Confirmation Code
+        </ion-button>
+        <div id='recaptcha-container'></div> -->
+
+        <ion-item>
+        <ion-label position="floating">Enter Phone No.</ion-label>
+        <ion-input type="number" name="number" [(ngModel)]="number"></ion-input>
+    </ion-item>
+    <ion-button expand="block" (click)="sendOtp()">Send OTP</ion-button>
+    </ion-card>
+</ion-content>
+
+<!-- <ion-content padding>
+    <ion-item>
+      <ion-label position="floating">Phone</ion-label>
+      <ion-input type="text" [(ngModel)]="phone"></ion-input>
+    </ion-item>
+    <ion-button expand="full" (click)="send()">Send</ion-button>
+    <ion-item>
+      <ion-label position="floating">Enter OTP</ion-label>
+      <ion-input type="text" [(ngModel)]="code"></ion-input>
+    </ion-item>
+    <ion-button expand="full" (click)="verify()">Verify</ion-button>
+  </ion-content> -->

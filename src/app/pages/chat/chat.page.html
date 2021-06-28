@@ -1,0 +1,73 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>Open Chat</ion-title>
+        <ion-buttons slot="end">
+            <ion-button fill="clear" (click)="signOut()">
+                <ion-icon name="log-out" slot="icon-only"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+    <ion-grid>
+        <ion-row *ngFor="let message of messages | async">
+            <ion-col size="9" class="message" [offset]="message.myMsg ? 3 : 0" [ngClass]="{ 'my-message': message.myMsg, 'other-message': !message.myMsg }">
+                <b>{{ message.fromName }}</b><br>
+                <span *ngIf="!message.msg.includes('data:image/jpeg;base64,')&& !message.msg.includes('.png')&& !message.msg.includes('.jpg')&& !message.msg.includes('.gif')">
+                    {{ message.msg }}
+                </span>
+                <img *ngIf="message.msg.includes('data:image/jpeg;base64,') || message.msg.includes('.png')|| message.msg.includes('.jpg')|| message.msg.includes('.gif')" style="height: 200px;width: 100%;object-fit: contain;" [src]="message.msg" alt="img" />
+                <div class="time ion-text-right"><br>{{ message.createdAt?.toMillis() | date:'short' }}</div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar color="light">
+        <ion-row class="ion-align-items-center" style="display: flex; justify-content: space-between;">
+            <ion-col size="2">
+                <ion-button (click)="presentImageSheet()">
+                    <ion-icon name="add"></ion-icon>
+                </ion-button>
+            </ion-col>
+            <ion-col size="7">
+                <ion-textarea *ngIf="!newMsg.includes('data:image/jpeg;base64,') && !newMsg.includes('.png')&& !newMsg.includes('.jpg')&& !newMsg.includes('.gif')" autoGrow="true" class="message-input" rows="1" maxLength="500" [(ngModel)]="newMsg">
+                </ion-textarea>
+                <ion-textarea *ngIf="newMsg.includes('data:image/jpeg;base64,') || newMsg.includes('.png')|| newMsg.includes('.jpg')|| newMsg.includes('.gif')" autoGrow="true" class="message-input" rows="1" maxLength="500">
+                </ion-textarea>
+            </ion-col>
+            <!-- <ion-col size="1.2">
+                <ion-button *ngIf="!showEmojiPicker" (click)="showGifPicker = !showGifPicker" color="secondary" class="ion-no-padding" style="width: 100%;">GIF</ion-button>
+            </ion-col> -->
+            <ion-col size="1.2">
+                <ion-icon (click)="showEmojiPicker= !showEmojiPicker" color="secondary" name="happy" style="font-size: 20px;width: 100%;"></ion-icon>
+            </ion-col>
+            <ion-col size="1.8">
+                <ion-button expand="block" fill="clear" color="primary" [disabled]="newMsg === ''" class="msg-btn" (click)="sendMessage()">
+                    <ion-icon name="send" slot="icon-only" style="font-size: 20px;width: 100%;"></ion-icon>
+                </ion-button>
+            </ion-col>
+        </ion-row>
+        <div>
+            <div class="emojiContainer" [style.height]="showEmojiPicker?'240px':'0px'">
+                <app-sticker (onEmojiSelect)="addEmoji($event)" (onGifSelect)="gifAdd($event)"></app-sticker>
+            </div>
+        </div>
+        <!-- <div>
+            <div class="emojiContainer" [style.height]="showEmojiPicker?'240px':'0px'">
+               
+                <emoji-picker (onEmojiSelect)="addEmoji($event)"></emoji-picker>
+            </div>
+        </div>
+        <div>
+            <div class="gifContainer" [style.height]="showGifPicker ?'240px':'0px'">
+                
+                <app-stamp (onGifSelect)="gifAdd($event)"></app-stamp>
+            </div>
+        </div> -->
+    </ion-toolbar>
+</ion-footer>
